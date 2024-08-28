@@ -8,7 +8,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
 import { ERROR_MESSAGE } from '../theme/errors-message';
-import { ProductRepository } from '../Repository/productRepository';
+import { ProductRepository } from '../repository/productRepository';
 
 @Injectable()
 export class ProductService {

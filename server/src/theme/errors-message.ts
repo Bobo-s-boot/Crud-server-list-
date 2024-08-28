@@ -6,6 +6,7 @@ export enum ERROR_MESSAGE {
   FAILD_UPDATE_ERROR = 'FAILD TO UPDATE ENTITY!',
   LIST_ERROR = 'LIST NOT FOUND',
   REMOVE_ERROR = 'PRODUCT NOT REMOVING',
+  GUARD_ERROR = 'PRODUCT NOT FOUND IN REQUEST',
 }
 
 // для майбутніх змін (наприклад колір помилки або шрифт)
