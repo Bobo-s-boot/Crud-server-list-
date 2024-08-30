@@ -2,7 +2,6 @@ import { EntityRepository, Repository } from 'typeorm';
 import { Product } from '../product/product.entity';
 import { CreateProductDto } from '../product/dto/create-product.dto';
 import { UpdateProductDto } from '../product/dto/update-product.dto';
-import { NotFoundError } from 'rxjs';
 import { ERROR_MESSAGE } from '../theme/errors-message';
 import { NotFoundException } from '@nestjs/common';
 
