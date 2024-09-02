@@ -5,9 +5,10 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Product } from 'src/product/product.entity';
 import { ERROR_MESSAGE } from 'src/theme/errors-message';
+import { ProductRepository } from './product.repository';
+import { Repository } from 'typeorm';
+import { Product } from './product.entity';
 
 @Injectable()
 export class ProductGuard implements CanActivate {

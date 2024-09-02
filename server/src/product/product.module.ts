@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductRepository } from 'src/repository/productRepository';
-import { ProductGuard } from 'src/guard/product.guard';
+import { createParamDecorator } from '@nestjs/common';
+import { Product } from 'src/product/product.entity';
+import { ProductRepository } from './product.repository';
+import { ProductGuard } from './product.guard';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProductRepository])],

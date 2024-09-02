@@ -1,5 +1,5 @@
 import { createParamDecorator } from '@nestjs/common';
-import { Product } from 'src/product/product.entity';
+import { Product } from './product.entity';
 
 export const GetId = createParamDecorator((data: string, context) => {
   const id: Product = context.switchToHttp().getRequest().id;

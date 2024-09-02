@@ -15,10 +15,10 @@ import {
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ProductGuard } from '../guard/product.guard';
-import { GetId } from 'src/guard/get-id.decorator';
+import { ProductGuard } from './product.guard';
+import { GetId } from './product.decorator';
 import { ERROR_MESSAGE } from 'src/theme/errors-message';
-import { SUCCESSFULLY_MESSAGE } from 'src/theme/successfully-message';
+import { Product } from './product.entity';
 
 @Controller('product')
 export class ProductController {
@@ -26,13 +26,12 @@ export class ProductController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  @UseGuards(ProductGuard)
-  @HttpCode(HttpStatus.BAD_REQUEST)
+  @HttpCode(HttpStatus.CREATED)
   create(@Body() createProductDto: CreateProductDto) {
     try {
       const newProduct = this.productService.create(createProductDto);
       return {
-        message: SUCCESSFULLY_MESSAGE.CREATE_SUCCESSFULLY,
+        message: 'Product successfully created',
         data: newProduct,
       };
     } catch (error) {
@@ -45,26 +44,28 @@ export class ProductController {
   }
 
   @Get()
-  @UseGuards(ProductGuard)
   findAll() {
     return this.productService.findAll();
   }
 
   @Get(':id')
   @UseGuards(ProductGuard)
-  findOne(@GetId() id: string) {
-    return this.productService.findOne(+id);
+  findOne(@GetId() product: Product) {
+    return product;
   }
 
   @Patch(':id')
   @UseGuards(ProductGuard)
-  update(@GetId() id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productService.update(+id, updateProductDto);
+  update(
+    @GetId() product: Product,
+    @Body() updateProductDto: UpdateProductDto,
+  ) {
+    return this.productService.update(product.id, updateProductDto);
   }
 
   @Delete(':id')
   @UseGuards(ProductGuard)
-  remove(@GetId() id: string) {
-    return this.productService.remove(+id);
+  remove(@GetId() product: Product) {
+    return this.productService.remove(product.id);
   }
 }
