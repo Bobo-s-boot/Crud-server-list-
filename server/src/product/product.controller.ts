@@ -26,21 +26,8 @@ export class ProductController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  @HttpCode(HttpStatus.CREATED)
   create(@Body() createProductDto: CreateProductDto) {
-    try {
-      const newProduct = this.productService.create(createProductDto);
-      return {
-        message: 'Product successfully created',
-        data: newProduct,
-      };
-    } catch (error) {
-      return {
-        statusCode: HttpStatus.BAD_REQUEST,
-        message: ERROR_MESSAGE.CREATE_ERROR,
-        error: error.message,
-      };
-    }
+    return this.productService.create(createProductDto);
   }
 
   @Get()
