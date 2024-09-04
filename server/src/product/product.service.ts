@@ -36,12 +36,9 @@ export class ProductService {
     }
   }
 
-  async findOne(id: number) {
+  async findOne(product: Product): Promise<Product> {
     try {
-      const product = await this.productRepository.findOne({ where: { id } });
-
       if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-
       return product;
     } catch (error) {
       console.error(ERROR_MESSAGE.NOTFOUND_ERROR, error.message);
@@ -49,26 +46,20 @@ export class ProductService {
     }
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto) {
+  async update(product: Product, updateProductDto: UpdateProductDto) {
     try {
-      const product = await this.productRepository.findOne({ where: { id } });
-
       if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-
-      return await this.productRepository.update(id, updateProductDto);
+      return await this.productRepository.update(product, updateProductDto);
     } catch (error) {
       console.error(ERROR_MESSAGE.UPDATE_ERROR, error.message);
       throw new InternalServerErrorException(ERROR_MESSAGE.FAILD_UPDATE_ERROR);
     }
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(product: Product): Promise<void> {
     try {
-      const product = await this.productRepository.findOne({ where: { id } });
-
       if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-
-      await this.productRepository.delete(id);
+      await this.productRepository.delete(product);
     } catch (error) {
       console.error(ERROR_MESSAGE.REMOVE_ERROR, error.message);
       throw new InternalServerErrorException(ERROR_MESSAGE.REMOVE_ERROR);

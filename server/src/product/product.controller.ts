@@ -47,12 +47,12 @@ export class ProductController {
     @GetId() product: Product,
     @Body() updateProductDto: UpdateProductDto,
   ) {
-    return this.productService.update(product.id, updateProductDto);
+    return this.productService.update(product, updateProductDto);
   }
 
   @Delete(':id')
   @UseGuards(ProductGuard)
   remove(@GetId() product: Product) {
-    return this.productService.remove(product.id);
+    return this.productService.remove(product);
   }
 }
