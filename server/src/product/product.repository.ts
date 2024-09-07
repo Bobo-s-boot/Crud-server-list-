@@ -25,26 +25,10 @@ export class ProductRepository extends Repository<Product> {
     });
   }
 
-  async getProductById(id: number): Promise<Product> {
-    const product = await this.findOne({
-      where: { id },
-    });
-
-    if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-
-    return product;
-  }
-
   async updateProduct(
-    id: number,
+    product: Product,
     updateProduct: UpdateProductDto,
   ): Promise<Product> {
-    const product = await this.findOne({
-      where: { id },
-    });
-
-    if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-
     if (updateProduct.name !== undefined) product.name = updateProduct.name;
     if (updateProduct.description !== undefined)
       product.description = updateProduct.description;
@@ -53,11 +37,7 @@ export class ProductRepository extends Repository<Product> {
     return await this.save(product);
   }
 
-  async deleteProduct(id: number): Promise<Product> {
-    const product = await this.findOne({ where: { id } });
-
-    if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-
+  async deleteProduct(product: Product): Promise<Product> {
     return await this.remove(product);
   }
 }

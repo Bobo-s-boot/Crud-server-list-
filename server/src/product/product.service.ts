@@ -19,7 +19,8 @@ export class ProductService {
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
     try {
-      const newProduct = await this.productRepository.create(createProductDto);
+      const newProduct =
+        await this.productRepository.createProduct(createProductDto);
       return await this.productRepository.save(newProduct);
     } catch (error) {
       console.error(ERROR_MESSAGE.CREATE_ERROR, error.message);
@@ -29,7 +30,7 @@ export class ProductService {
 
   async findAll(): Promise<Product[]> {
     try {
-      return await this.productRepository.find();
+      return await this.productRepository.getProductList();
     } catch (error) {
       console.error(ERROR_MESSAGE.LIST_ERROR, error.message);
       throw new InternalServerErrorException(ERROR_MESSAGE.LIST_ERROR);
@@ -38,7 +39,6 @@ export class ProductService {
 
   async findOne(product: Product): Promise<Product> {
     try {
-      if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
       return product;
     } catch (error) {
       console.error(ERROR_MESSAGE.NOTFOUND_ERROR, error.message);
@@ -48,8 +48,10 @@ export class ProductService {
 
   async update(product: Product, updateProductDto: UpdateProductDto) {
     try {
-      if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-      return await this.productRepository.update(product, updateProductDto);
+      return await this.productRepository.updateProduct(
+        product,
+        updateProductDto,
+      );
     } catch (error) {
       console.error(ERROR_MESSAGE.UPDATE_ERROR, error.message);
       throw new InternalServerErrorException(ERROR_MESSAGE.FAILD_UPDATE_ERROR);
@@ -58,8 +60,7 @@ export class ProductService {
 
   async remove(product: Product): Promise<void> {
     try {
-      if (!product) throw new NotFoundException(ERROR_MESSAGE.NOTFOUND_ERROR);
-      await this.productRepository.delete(product);
+      await this.productRepository.deleteProduct(product);
     } catch (error) {
       console.error(ERROR_MESSAGE.REMOVE_ERROR, error.message);
       throw new InternalServerErrorException(ERROR_MESSAGE.REMOVE_ERROR);
