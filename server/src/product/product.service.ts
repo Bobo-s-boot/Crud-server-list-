@@ -19,9 +19,7 @@ export class ProductService {
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
     try {
-      const newProduct =
-        await this.productRepository.createProduct(createProductDto);
-      return await this.productRepository.save(newProduct);
+      return await this.productRepository.createProduct(createProductDto);
     } catch (error) {
       console.error(ERROR_MESSAGE.CREATE_ERROR, error.message);
       throw new InternalServerErrorException(ERROR_MESSAGE.FAILD_CREATE_ERROR);

@@ -1,18 +1,17 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateProductDto } from '../product/dto/create-product.dto';
 import { UpdateProductDto } from '../product/dto/update-product.dto';
-import { NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Product } from './product.entity';
-import { ERROR_MESSAGE } from 'src/theme/errors-message';
 
-@EntityRepository(Product)
+@Injectable()
 export class ProductRepository extends Repository<Product> {
   async createProduct(createProduct: CreateProductDto): Promise<Product> {
     const product = new Product();
 
-    (product.name = createProduct.name),
-      (product.description = createProduct.description),
-      (product.price = createProduct.price);
+    product.name = createProduct.name;
+    product.description = createProduct.description;
+    product.price = createProduct.price;
 
     return await this.save(product);
   }
