@@ -9,29 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateProductDto = void 0;
+exports.CreateProductDTO = void 0;
 const class_validator_1 = require("class-validator");
-class CreateProductDto {
+class CreateProductDTO {
 }
-exports.CreateProductDto = CreateProductDto;
+exports.CreateProductDTO = CreateProductDTO;
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], CreateProductDto.prototype, "id", void 0);
+], CreateProductDTO.prototype, "id", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateProductDto.prototype, "name", void 0);
+], CreateProductDTO.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], CreateProductDto.prototype, "price", void 0);
+], CreateProductDTO.prototype, "price", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateProductDto.prototype, "description", void 0);
+], CreateProductDTO.prototype, "description", void 0);
 //# sourceMappingURL=create-product.dto.js.map
