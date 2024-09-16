@@ -1,27 +1,39 @@
 import { Repository } from 'typeorm';
-import { CreateProductDto } from '../product/dto/create-product.dto';
+import { CreateProductDTO } from '../product/dto/create-product.dto';
 import { UpdateProductDto } from '../product/dto/update-product.dto';
 import { Injectable } from '@nestjs/common';
 import { Product } from './product.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class ProductRepository extends Repository<Product> {
-  async createProduct(createProduct: CreateProductDto): Promise<Product> {
+export class ProductRepository {
+  constructor(
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
+  ) {}
+
+  async createProduct(createProductDto: CreateProductDTO): Promise<Product> {
     const product = new Product();
 
-    product.name = createProduct.name;
-    product.description = createProduct.description;
-    product.price = createProduct.price;
+    product.name = createProductDto.name;
+    product.description = createProductDto.description;
+    product.price = createProductDto.price;
 
-    return await this.save(product);
+    console.log(this);
+    return await this.productRepository.save(product);
   }
 
   async getProductList(): Promise<Product[]> {
-    return await this.find({
+    return await this.productRepository.find({
       order: {
         id: 'DESC',
       },
     });
+  }
+
+  //функція для дикоратора за допоиогою якого шукаємо наш продукт іd
+  async getProduct(id: number): Promise<Product> {
+    return await this.productRepository.findOne({ where: { id } });
   }
 
   async updateProduct(
@@ -33,10 +45,10 @@ export class ProductRepository extends Repository<Product> {
       product.description = updateProduct.description;
     if (updateProduct.price !== undefined) product.price = updateProduct.price;
 
-    return await this.save(product);
+    return await this.productRepository.save(product);
   }
 
   async deleteProduct(product: Product): Promise<Product> {
-    return await this.remove(product);
+    return await this.productRepository.remove(product);
   }
 }
