@@ -19,7 +19,6 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            product_module_1.ProductModule,
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
             }),
@@ -37,6 +36,7 @@ exports.AppModule = AppModule = __decorate([
                 }),
                 inject: [config_1.ConfigService],
             }),
+            product_module_1.ProductModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

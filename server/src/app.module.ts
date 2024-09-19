@@ -7,7 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    ProductModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -25,6 +24,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
       inject: [ConfigService],
     }),
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

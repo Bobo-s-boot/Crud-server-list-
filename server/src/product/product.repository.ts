@@ -7,7 +7,7 @@ import { UpdateProductDto } from '../product/dto/update-product.dto';
 export class ProductRepository extends Repository<Product> {
   async createProduct(createProductDto: CreateProductDTO): Promise<Product> {
     const product = new Product();
-    
+
     product.name = createProductDto.name;
     product.description = createProductDto.description;
     product.price = createProductDto.price;
@@ -24,7 +24,11 @@ export class ProductRepository extends Repository<Product> {
   }
 
   async getProduct(id: number): Promise<Product> {
-    return await this.findOne({ where: { id } });
+    const product = await this.findOne({ where: { id } });
+    if (!product) {
+      throw new Error(`Product with id not found`);
+    }
+    return product;
   }
 
   async updateProduct(

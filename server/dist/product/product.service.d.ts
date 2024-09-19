@@ -12,7 +12,7 @@ export declare class ProductService {
     update(product: Product, updateProductDto: UpdateProductDto): Promise<{
         id: number;
         name: string;
-        description: string;
+        description: string | undefined;
         price: number;
     }>;
     remove(product: Product): Promise<void>;

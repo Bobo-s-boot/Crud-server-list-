@@ -25,7 +25,11 @@ let ProductRepository = class ProductRepository extends typeorm_1.Repository {
         });
     }
     async getProduct(id) {
-        return await this.findOne({ where: { id } });
+        const product = await this.findOne({ where: { id } });
+        if (!product) {
+            throw new Error(`Product with id not found`);
+        }
+        return product;
     }
     async updateProduct(product, updateProduct) {
         if (updateProduct.name !== undefined)
