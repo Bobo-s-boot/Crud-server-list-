@@ -2,6 +2,7 @@ import { EntityRepository, Repository } from 'typeorm';
 import { Product } from './product.entity';
 import { CreateProductDTO } from '../product/dto/create-product.dto';
 import { UpdateProductDto } from '../product/dto/update-product.dto';
+import { ERROR_MESSAGE } from 'src/theme/errors-message';
 
 @EntityRepository(Product)
 export class ProductRepository extends Repository<Product> {
@@ -26,7 +27,7 @@ export class ProductRepository extends Repository<Product> {
   async getProduct(id: number): Promise<Product> {
     const product = await this.findOne({ where: { id } });
     if (!product) {
-      throw new Error(`Product with id not found`);
+      throw new Error(ERROR_MESSAGE.PRODUCT_ERROR);
     }
     return product;
   }

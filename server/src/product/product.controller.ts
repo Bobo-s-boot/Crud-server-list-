@@ -24,7 +24,7 @@ export class ProductController {
   @Post('/')
   @UsePipes(new ValidationPipe())
   async create(
-    @Body(ValidationPipe) createProductDto: CreateProductDTO,
+    @Body() createProductDto: CreateProductDTO,
   ): Promise<GetProductShortDataDTO> {
     return this.productService.create(createProductDto);
   }

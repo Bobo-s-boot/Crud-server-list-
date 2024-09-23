@@ -22,7 +22,6 @@ export class ProductGuard implements CanActivate {
     if (!params.productId)
       throw new BadRequestException(ERROR_MESSAGE.GUARD_ERROR);
 
-    console.log(this.productRepository);
     const product = await this.productRepository.getProduct(params.productId);
 
     if (!product) throw new BadRequestException(ERROR_MESSAGE.GUARD_ERROR);

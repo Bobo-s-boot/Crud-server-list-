@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PhotoModule } from './photo/photo.module';
+import { Product } from './product/product.entity';
+import { Photo } from './photo/photo.entity';
 
 @Module({
   imports: [
@@ -20,11 +23,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         synchronize: true,
-        entities: [__dirname + '/**/*.entity{.js, .ts}'],
+        entities: [Product, Photo],
       }),
       inject: [ConfigService],
     }),
     ProductModule,
+    PhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

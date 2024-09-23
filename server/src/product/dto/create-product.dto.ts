@@ -1,10 +1,14 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { CreatePhotoDto } from 'src/photo/dto/create-photo.dto';
 
 export class CreateProductDTO {
-  @IsOptional()
-  @IsNumber()
-  id?: number;
-
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -16,4 +20,9 @@ export class CreateProductDTO {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => CreatePhotoDto)
+  photo?: CreatePhotoDto;
 }
