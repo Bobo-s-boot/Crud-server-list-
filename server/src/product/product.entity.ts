@@ -1,3 +1,4 @@
+import { Category } from 'src/category/category.entity';
 import { Photo } from 'src/photo/photo.entity';
 import {
   Entity,
@@ -7,6 +8,7 @@ import {
   UpdateDateColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
@@ -26,6 +28,10 @@ export class Product {
   @OneToOne(() => Photo, { nullable: true })
   @JoinColumn()
   photo?: Photo;
+
+  @ManyToOne(() => Category, (category) => category.product)
+  @JoinColumn()
+  category: Category;
 
   @CreateDateColumn()
   createdAt: Date;

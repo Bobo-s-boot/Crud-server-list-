@@ -16,6 +16,8 @@ const typeorm_1 = require("@nestjs/typeorm");
 const photo_module_1 = require("./photo/photo.module");
 const product_entity_1 = require("./product/product.entity");
 const photo_entity_1 = require("./photo/photo.entity");
+const category_module_1 = require("./category/category.module");
+const category_entity_1 = require("./category/category.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,12 +37,13 @@ exports.AppModule = AppModule = __decorate([
                     password: configService.get('DB_PASSWORD'),
                     database: configService.get('DB_NAME'),
                     synchronize: true,
-                    entities: [product_entity_1.Product, photo_entity_1.Photo],
+                    entities: [product_entity_1.Product, photo_entity_1.Photo, category_entity_1.Category],
                 }),
                 inject: [config_1.ConfigService],
             }),
             product_module_1.ProductModule,
             photo_module_1.PhotoModule,
+            category_module_1.CategoryModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

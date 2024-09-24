@@ -9,48 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
-const category_entity_1 = require("../category/category.entity");
-const photo_entity_1 = require("../photo/photo.entity");
+exports.Category = void 0;
+const product_entity_1 = require("../product/product.entity");
 const typeorm_1 = require("typeorm");
-let Product = class Product {
+let Category = class Category {
 };
-exports.Product = Product;
+exports.Category = Category;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Product.prototype, "id", void 0);
+], Category.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Product.prototype, "name", void 0);
+], Category.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)('decimal'),
-    __metadata("design:type", Number)
-], Product.prototype, "price", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Product.prototype, "description", void 0);
-__decorate([
-    (0, typeorm_1.OneToOne)(() => photo_entity_1.Photo, { nullable: true }),
-    (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", photo_entity_1.Photo)
-], Product.prototype, "photo", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => category_entity_1.Category, (category) => category.product),
-    (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", category_entity_1.Category)
-], Product.prototype, "category", void 0);
+    (0, typeorm_1.OneToMany)(() => product_entity_1.Product, (product) => product.category),
+    __metadata("design:type", Array)
+], Category.prototype, "product", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Product.prototype, "createdAt", void 0);
+], Category.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Product.prototype, "updatedAt", void 0);
-exports.Product = Product = __decorate([
+], Category.prototype, "updatedAt", void 0);
+exports.Category = Category = __decorate([
     (0, typeorm_1.Entity)()
-], Product);
-//# sourceMappingURL=product.entity.js.map
+], Category);
+//# sourceMappingURL=category.entity.js.map

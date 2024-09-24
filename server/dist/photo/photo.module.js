@@ -12,14 +12,15 @@ const photo_service_1 = require("./photo.service");
 const photo_controller_1 = require("./photo.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const photo_repository_1 = require("./photo.repository");
+const photo_decorator_1 = require("./photo.decorator");
 let PhotoModule = class PhotoModule {
 };
 exports.PhotoModule = PhotoModule;
 exports.PhotoModule = PhotoModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([photo_repository_1.PhotoRepository])],
+        providers: [photo_service_1.PhotoService, photo_decorator_1.PhotoGuard],
         controllers: [photo_controller_1.PhotoController],
-        providers: [photo_service_1.PhotoService],
         exports: [photo_service_1.PhotoService],
     })
 ], PhotoModule);

@@ -10,6 +10,7 @@ export enum ERROR_MESSAGE {
   GUARD_ERROR = 'PRODUCT NOT FOUND IN REQUEST!',
   PRODUCT_ERROR = 'PRODUCT WITH ID NOT FOUND!',
   PHOTO_ERROR = 'PHOTO WITH ID NOT FOUND!`',
+  CATEGORY_ERROR = 'CATEGORY NOT FOUND!',
 }
 
 // для майбутніх змін (наприклад колір помилки або шрифт)

@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PhotoModule } from './photo/photo.module';
 import { Product } from './product/product.entity';
 import { Photo } from './photo/photo.entity';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/category.entity';
 
 @Module({
   imports: [
@@ -23,12 +25,13 @@ import { Photo } from './photo/photo.entity';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         synchronize: true,
-        entities: [Product, Photo],
+        entities: [Product, Photo, Category],
       }),
       inject: [ConfigService],
     }),
     ProductModule,
     PhotoModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
